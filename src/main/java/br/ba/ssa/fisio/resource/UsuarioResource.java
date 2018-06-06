@@ -1,6 +1,7 @@
 package br.ba.ssa.fisio.resource;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.model.Usuario;
+import br.ba.ssa.fisio.repository.UsuarioRepository;
 import br.ba.ssa.fisio.service.UsuarioService;
 
 @RestController
@@ -29,6 +33,9 @@ public class UsuarioResource {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private UsuarioRepository repository;
 	
 	@GetMapping
 	public ResponseEntity<ResponseApi<List<Usuario>>> listar(){
@@ -87,5 +94,13 @@ public class UsuarioResource {
 		return ResponseEntity.ok(new ResponseApi<Boolean>(true));
 		
 	}
+	
+    @GetMapping(value = "/usuario/logado")
+    @ResponseBody
+    public Usuario currentUserName(Principal principal) {
+        Usuario usuario = this.repository.findByEmail(principal.getName());
+        usuario.setSenha("");
+        return usuario;
+    }	
 
 }

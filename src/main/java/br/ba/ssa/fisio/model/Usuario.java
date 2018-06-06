@@ -6,8 +6,8 @@ import java.util.List;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -45,19 +45,23 @@ public class Usuario {
     private String bairro;
 
     private String cidade;
-
+    
     @NotEmpty(message = "Campo PORTA é de preechimento obrigatório.")
     private String porta;
+    
+    private String latitude;
+    
+    private String longitude;
 
     @NotEmpty(message = "Campo EMAIL é de preechimento obrigatório.")
     private String email;
 
     private String imgperfil;
 
-    private Integer tipo;
+    private Byte tipo;
 
     @NotNull(message = "Campo SEXO é de preechimento obrigatório.")
-    private Integer sexo;
+    private Byte sexo;
 
     private Long facebookId;
 
@@ -66,10 +70,8 @@ public class Usuario {
     @NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
     private String onesignalId;
 
-    private Byte flag_ativo;
-    
-    @DBRef
-    private List<Perfil> perfis;
+    @Value("1")
+    private Byte ativo;
     
     public Usuario() {}
     
@@ -78,6 +80,19 @@ public class Usuario {
 		this.id = id;
 	}    
 
+    public Usuario(Usuario usuario) {
+        this.nome = usuario.getNome();
+        this.email = usuario.getEmail();
+        this.senha = usuario.getSenha();
+    }
+
+    public Usuario(String nome, String email, String senha, List<Perfil> perfis) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -173,6 +188,22 @@ public class Usuario {
 	public void setPorta(String porta) {
 		this.porta = porta;
 	}
+	
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
 
 	public String getEmail() {
 		return email;
@@ -190,19 +221,19 @@ public class Usuario {
 		this.imgperfil = imgperfil;
 	}
 
-	public Integer getTipo() {
+	public Byte getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(Byte tipo) {
 		this.tipo = tipo;
 	}
 
-	public Integer getSexo() {
+	public Byte getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(Integer sexo) {
+	public void setSexo(Byte sexo) {
 		this.sexo = sexo;
 	}
 
@@ -230,12 +261,12 @@ public class Usuario {
 		this.onesignalId = onesignalId;
 	}
 
-	public byte getFlag_ativo() {
-		return flag_ativo;
+	public Byte getAtivo() {
+		return ativo;
 	}
 
-	public void setFlag_ativo(byte flag_ativo) {
-		this.flag_ativo = flag_ativo;
+	public void setAtivo(Byte ativo) {
+		this.ativo = ativo;
 	}
 
 	public String getOnesignalId() {
@@ -246,16 +277,8 @@ public class Usuario {
 		this.onesignalId = onesignalId;
 	}
 
-	public List<Perfil> getPerfis() {
-		return perfis;
-	}
-
-	public void setPerfis(List<Perfil> perfis) {
-		this.perfis = perfis;
-	}
-
 	public void setGoogleId(Long googleId) {
 		this.googleId = googleId;
 	}
-
+	
 }

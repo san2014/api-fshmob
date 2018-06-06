@@ -6,4 +6,6 @@ import br.ba.ssa.fisio.model.Perfil;
 
 public interface PerfilRepository extends MongoRepository<Perfil, String> {
 
+	Perfil findByNome(String nome);
+
 }

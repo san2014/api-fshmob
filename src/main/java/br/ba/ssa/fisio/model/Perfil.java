@@ -2,14 +2,28 @@ package br.ba.ssa.fisio.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
 
 @Document
-public class Perfil {
+public class Perfil implements GrantedAuthority {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String id;
 	
-	private String descricao;
+	private String nome;
+	
+	public Perfil() {
+		
+	}
+	
+	public Perfil(String nome) {
+		this.nome = nome;
+	}
 
 	public String getId() {
 		return id;
@@ -19,12 +33,17 @@ public class Perfil {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
+	public String getAuthority() {
+		return nome;
 	}
 	
 }
