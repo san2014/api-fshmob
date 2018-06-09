@@ -95,7 +95,7 @@ public class UsuarioResource {
 		
 	}
 	
-    @GetMapping(value = "/usuario/logado")
+    @GetMapping(value = "/logado")
     @ResponseBody
     public Usuario currentUserName(Principal principal) {
         Usuario usuario = this.repository.findByEmail(principal.getName());

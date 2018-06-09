@@ -74,7 +74,7 @@ public class OAuth2ServerConfiguration {
 					.scopes("bar", "read", "write")
 					.refreshTokenValiditySeconds(86400)
 					.resourceIds(RESOURCE_ID)
-					.secret("ha$hdev48").accessTokenValiditySeconds(30);
+					.secret("ha$hdev48").accessTokenValiditySeconds(86400);
 
 		}
 
