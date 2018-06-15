@@ -1,24 +1,26 @@
 package br.ba.ssa.fisio.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Document
-public class Usuario {
+public class Usuario implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String id;
     
-	@NotEmpty(message = "Campo APELIDO é de preechimento obrigatório.")
+	@NotNull(message = "Campo APELIDO é de preechimento obrigatório.")
 	private String apelido;
 
 	@NotEmpty(message = "Campo SENHA é de preechimento obrigatório.")
@@ -58,7 +60,7 @@ public class Usuario {
 
     private String imgperfil;
 
-    private Byte tipo;
+    private PerfilEnum perfil;
 
     @NotNull(message = "Campo SEXO é de preechimento obrigatório.")
     private Byte sexo;
@@ -67,10 +69,9 @@ public class Usuario {
 
     private Long googleId;
 
-    @NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
+    @org.hibernate.validator.constraints.NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
     private String onesignalId;
 
-    @Value("1")
     private Byte ativo;
     
     public Usuario() {}
@@ -221,12 +222,12 @@ public class Usuario {
 		this.imgperfil = imgperfil;
 	}
 
-	public Byte getTipo() {
-		return tipo;
+	public PerfilEnum getPerfil() {
+		return perfil;
 	}
 
-	public void setTipo(Byte tipo) {
-		this.tipo = tipo;
+	public void setPerfil(PerfilEnum perfil) {
+		this.perfil = perfil;
 	}
 
 	public Byte getSexo() {

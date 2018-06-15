@@ -2,6 +2,7 @@ package br.ba.ssa.fisio.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -23,7 +24,7 @@ public class UsuarioService {
 	
 	public Usuario obter(String id) {
 		try {
-			return this.usuarioRepository.findById(id).get();
+			return this.usuarioRepository.findOne(id);
 		} catch (NoSuchElementException e) {
 			throw new GenericException("Usuário Inexisente");
 		}
@@ -40,13 +41,19 @@ public class UsuarioService {
 	
 	public void excluir(String id) {
 		this.verificarExistencia(id);
-		this.usuarioRepository.deleteById(id);
+		this.usuarioRepository.delete(id);
+	}
+	
+	public Optional<Usuario> buscaPorEmail(String email){
+		return Optional.ofNullable(this.usuarioRepository.findByEmail(email));
 	}
 	
 	private void verificarExistencia(String id) {
-		if (!this.usuarioRepository.existsById(id)) {
+		if (!this.usuarioRepository.exists(id)) {
 			throw new GenericException("Usuário inexistente!");
 		}
-	}	
+	}
+	
+	
 
 }
