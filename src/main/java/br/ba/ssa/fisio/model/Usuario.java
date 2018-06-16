@@ -3,9 +3,9 @@ package br.ba.ssa.fisio.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
