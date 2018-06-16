@@ -23,7 +23,7 @@ public class ProfissionalService {
 	public Profissional obter(String id) {
 		
 		try {
-			return this.profissionalRepository.findById(id).get();
+			return this.profissionalRepository.findOne(id);
 		} catch (NoSuchElementException e) {
 			throw new GenericException("Profissional Inexisente");
 		}
@@ -41,11 +41,11 @@ public class ProfissionalService {
 	
 	public void excluir(String id) {
 		this.verificarExistencia(id);
-		this.profissionalRepository.deleteById(id);
+		this.profissionalRepository.delete(id);
 	}
 	
 	private void verificarExistencia(String id) {
-		if (!this.profissionalRepository.existsById(id)) {
+		if (!this.profissionalRepository.exists(id)) {
 			throw new GenericException("Profissional inexistente!");
 		}
 	}

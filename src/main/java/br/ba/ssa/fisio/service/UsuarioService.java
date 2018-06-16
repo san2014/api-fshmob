@@ -23,7 +23,7 @@ public class UsuarioService {
 	
 	public Usuario obter(String id) {
 		try {
-			return this.usuarioRepository.findById(id).get();
+			return this.usuarioRepository.findOne(id);
 		} catch (NoSuchElementException e) {
 			throw new GenericException("Usuário Inexisente");
 		}
@@ -40,11 +40,11 @@ public class UsuarioService {
 	
 	public void excluir(String id) {
 		this.verificarExistencia(id);
-		this.usuarioRepository.deleteById(id);
+		this.usuarioRepository.delete(id);
 	}
 	
 	private void verificarExistencia(String id) {
-		if (!this.usuarioRepository.existsById(id)) {
+		if (!this.usuarioRepository.exists(id)) {
 			throw new GenericException("Usuário inexistente!");
 		}
 	}	

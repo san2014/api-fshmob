@@ -17,7 +17,7 @@ public class TipoAtendimento {
 	
 	private String imgUrl;
 	
-	private byte ativo;
+	private Boolean ativo;
 
 	public String getId() {
 		return id;
@@ -51,12 +51,12 @@ public class TipoAtendimento {
 		this.imgUrl = imgUrl;
 	}
 
-	public byte getAtivo() {
+	public Boolean getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(byte ativo) {
+	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
+
 }
