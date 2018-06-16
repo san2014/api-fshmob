@@ -3,7 +3,6 @@ package br.ba.ssa.fisio.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
@@ -18,7 +17,7 @@ public class Profissional{
 	@Id
 	private String id; 
 	
-	@NotEmpty(message = "Um usuário existente deve ser informado")
+	@NotNull(message = "Um usuário existente deve ser informado")
 	private Usuario usuario;
 
 	@NotNull(message = "O campo credenciamento não pode ser vazio")

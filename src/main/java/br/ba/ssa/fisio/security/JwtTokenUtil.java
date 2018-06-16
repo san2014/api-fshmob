@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Component
 public class JwtTokenUtil {
 
 	static final String CLAIM_KEY_USERNAME​ = "sub";
@@ -24,29 +26,39 @@ public class JwtTokenUtil {
 	private Long expiration;
 
 	public String getUsernameFromToken(String token) {
+		
 		String username;
+		
 		try {
 			Claims claims = getClaimsFromToken(token);
 			username = claims.getSubject();
 		} catch (Exception e) {
 			username = null;
 		}
+		
 		return username;
+		
 	}
 
 	public Date getExpirationDateFromToken​(String token) {
+		
 		Date expiration​;
+		
 		try {
 			Claims claims​ = this.getClaimsFromToken(token);
 			expiration​ = claims​.getExpiration();
 		} catch (Exception e) {
 			expiration​ = null;
 		}
+		
 		return expiration​;
+		
 	}
 
 	public String refreshToken​(String token​) {
+		
 		String refreshedToken​;
+		
 		try {
 			Claims claims​ = this.getClaimsFromToken(token​);
 			claims​.put(CLAIM_KEY_CREATED​, new Date());
@@ -54,7 +66,9 @@ public class JwtTokenUtil {
 		} catch (Exception e) {
 			refreshedToken​ = null;
 		}
+		
 		return refreshedToken​;
+		
 	}
 
 	public boolean tokenValido(String token) {
@@ -73,16 +87,21 @@ public class JwtTokenUtil {
 		claims​.put(CLAIM_KEY_CREATED​, new Date());
 
 		return this.gerarToken(claims​);
+		
 	}
 
 	public Claims getClaimsFromToken(String token) {
+		
 		Claims claims;
+		
 		try {
 			claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
 		} catch (Exception e) {
 			claims = null;
 		}
+		
 		return claims;
+		
 	}
 
 	private Date gerarDataExpiracao() {
