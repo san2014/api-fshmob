@@ -69,10 +69,10 @@ public class Usuario implements Serializable{
 
     private Long googleId;
 
-    @org.hibernate.validator.constraints.NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
+    @NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
     private String onesignalId;
 
-    private Byte ativo;
+    private Boolean ativo;
     
     public Usuario() {}
     
@@ -87,10 +87,11 @@ public class Usuario implements Serializable{
         this.senha = usuario.getSenha();
     }
 
-    public Usuario(String nome, String email, String senha, List<Perfil> perfis) {
+    public Usuario(String nome, String email, String senha, PerfilEnum perfil) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+        this.perfil = perfil;
     }
 	
 	
@@ -254,19 +255,11 @@ public class Usuario implements Serializable{
 		this.googleId = googleId;
 	}
 
-	public String getOnesignaId() {
-		return onesignalId;
-	}
-
-	public void setOnesignal_id(String onesignalId) {
-		this.onesignalId = onesignalId;
-	}
-
-	public Byte getAtivo() {
+	public Boolean getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(Byte ativo) {
+	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
 

@@ -99,16 +99,21 @@ public class AuthenticationController {
 		}
 		
 		if(!token.isPresent()) {
-			responseApi​.getErros().add("Token inválido ou expirado");
+			responseApi​.getErros().add("Acesso negado");
 		}
 		
 		if(!responseApi​.getErros().isEmpty()) {
 			return ResponseEntity.badRequest().body(responseApi​);
 		}
 		
-		String refreshdToken = jwtTokenUtil.refreshToken​(token.get());
+		Optional<String> refreshdToken = Optional.ofNullable(jwtTokenUtil.refreshToken​(token.get()));
 		
-		responseApi​.setData(this.getTokenDto(refreshdToken));
+		if(!refreshdToken.isPresent()) {
+			responseApi​.getErros().add("Token inválido ou expirado");
+			return ResponseEntity.badRequest().body(responseApi​);			
+		}
+		
+		responseApi​.setData(this.getTokenDto(refreshdToken.get()));
 		
 		return ResponseEntity.ok(responseApi​);
 		
