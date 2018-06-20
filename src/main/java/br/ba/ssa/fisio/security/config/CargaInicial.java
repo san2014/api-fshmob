@@ -16,6 +16,7 @@ import br.ba.ssa.fisio.model.PerfilEnum;
 import br.ba.ssa.fisio.model.Usuario;
 import br.ba.ssa.fisio.repository.PerfilRepository;
 import br.ba.ssa.fisio.repository.UsuarioRepository;
+import br.ba.ssa.fisio.security.SenhaUtils;
 
 @Component
 public class CargaInicial implements ApplicationListener<ContextRefreshedEvent> {
@@ -35,11 +36,12 @@ public class CargaInicial implements ApplicationListener<ContextRefreshedEvent> 
             Usuario usuario = new Usuario();
             
             usuario.setNome("Alesandro Carvalho");
-            usuario.setEmail("carvalho.alesandro@gmal.com");
+            usuario.setEmail("carvalho.alesandro@gmail.com");
             usuario.setCpf(1692866575l);
             usuario.setRg("1118627873");
             usuario.setImgperfil("");
             usuario.setApelido("San");
+            usuario.setSenha(SenhaUtils.gerarBCrypt("123456"));
             
             try {
 				usuario.setNascimento(sdf.parse("27/12/1984"));
