@@ -7,7 +7,7 @@
 	<groupId>br.ba.ssa.fisio</groupId>
 	<artifactId>api-fisio-mongodb</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>api-fisio-mongodb</name>
 	<description>API Rest FisioHome</description>
