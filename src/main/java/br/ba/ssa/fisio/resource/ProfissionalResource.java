@@ -24,26 +24,26 @@ import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.service.ProfissionalService;
 
 @RestController
-@RequestMapping(value="profissional")
+@RequestMapping(value = "profissional")
 public class ProfissionalResource {
-	
+
 	@Autowired
 	private ProfissionalService profissionalService;
-	
+
 	@GetMapping
 	public ResponseEntity<ResponseApi<List<Profissional>>> listar() {
 		return ResponseEntity.ok(new ResponseApi<List<Profissional>>(this.profissionalService.listar()));
 	}
 
-	@GetMapping(value="/{id}")
-	public ResponseEntity<ResponseApi<Profissional>> obter(@PathVariable("id") String id){
-		
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ResponseApi<Profissional>> obter(@PathVariable("id") String id) {
+
 		Profissional profissional = this.profissionalService.obter(id);
-		
+
 		return ResponseEntity.ok(new ResponseApi<Profissional>(profissional));
-		
+
 	}
-		
+
 	@PostMapping
 	public ResponseEntity<ResponseApi<Profissional>> incluir(@Valid @RequestBody Profissional profissional,
 			BindingResult result) {
@@ -62,7 +62,7 @@ public class ProfissionalResource {
 		return ResponseEntity.created(uri).body(new ResponseApi<Profissional>(profissional));
 
 	}
-	
+
 	@PutMapping(value = "{id}")
 	public ResponseEntity<ResponseApi<Profissional>> atualizar(@PathVariable("id") String id,
 			@Valid @RequestBody Profissional profissional, BindingResult result) {
@@ -80,14 +80,14 @@ public class ProfissionalResource {
 		return ResponseEntity.ok(new ResponseApi<Profissional>(profissional));
 
 	}
-	
-	@DeleteMapping(value="/{id}")
+
+	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") String id) {
 
 		this.profissionalService.excluir(id);
-		
+
 		return ResponseEntity.ok(new ResponseApi<Boolean>(true));
-		
-	}	
+
+	}
 
 }

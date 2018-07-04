@@ -35,10 +35,13 @@ public class Profissional{
     @NotNull(message = "Um banco deve ser informado")
     private String banco;
     
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date dataEspera;
+    
     @DBRef
     private List<EspecialidadeAtendimento> especialidades;
 
-    private byte disponivel;
+    private Boolean disponivel;
     
 	public String getId() {
 		return id;
@@ -104,13 +107,20 @@ public class Profissional{
 		this.especialidades = especialidades;
 	}
 
-	public byte getDisponivel() {
+	public Boolean getDisponivel() {
 		return disponivel;
 	}
 
-	public void setDisponivel(byte disponivel) {
+	public void setDisponivel(Boolean disponivel) {
 		this.disponivel = disponivel;
 	}
 
-    
+	public Date getDataEspera() {
+		return dataEspera;
+	}
+
+	public void setDataEspera(Date dataEspera) {
+		this.dataEspera = dataEspera;
+	}
+
 }

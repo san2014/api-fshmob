@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.ba.ssa.fisio.model.PerfilEnum;
 import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.model.Usuario;
 import br.ba.ssa.fisio.repository.UsuarioRepository;
@@ -101,5 +102,15 @@ public class UsuarioResource {
         usuario.setSenha("");
         return usuario;
     }	
+    
+    @GetMapping(value="/filtrarProfissionais/{idCliente}")
+	public ResponseEntity<ResponseApi<List<Usuario>>> getProximoCliente(@PathVariable("idCliente") String idCliente){
+		
+		Usuario cliente = this.usuarioService.obter(idCliente);
+		
+		List<Usuario> usuarios = this.usuarioService.getByCoordenadas(cliente.getLocation(), PerfilEnum.ROLE_PROFISSIONAL.toString());
+		
+		return ResponseEntity.ok(new ResponseApi<List<Usuario>>(usuarios));
+	}    
 
 }

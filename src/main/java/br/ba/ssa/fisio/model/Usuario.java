@@ -2,12 +2,14 @@ package br.ba.ssa.fisio.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -48,12 +50,11 @@ public class Usuario implements Serializable{
 
     private String cidade;
     
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+    private Point location;
+    
     @NotEmpty(message = "Campo PORTA é de preechimento obrigatório.")
     private String porta;
-    
-    private String latitude;
-    
-    private String longitude;
 
     @NotEmpty(message = "Campo EMAIL é de preechimento obrigatório.")
     private String email;
@@ -186,27 +187,20 @@ public class Usuario implements Serializable{
 	public String getPorta() {
 		return porta;
 	}
+	
+
+	public Point getLocation() {
+		return location;
+	}
+
+	public void setLocation(Point location) {
+		this.location = location;
+	}
 
 	public void setPorta(String porta) {
 		this.porta = porta;
 	}
 	
-	public String getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-
-	public String getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -274,5 +268,7 @@ public class Usuario implements Serializable{
 	public void setGoogleId(Long googleId) {
 		this.googleId = googleId;
 	}
+
+
 	
 }
