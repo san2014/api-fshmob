@@ -49,9 +49,13 @@ public class ProfissionalResource {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
+			
 			List<String> erros = new ArrayList<String>();
+			
 			result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
+			
 			return ResponseEntity.badRequest().body(new ResponseApi<Profissional>(erros));
+			
 		}
 
 		this.profissionalService.incluir(profissional);
@@ -68,9 +72,13 @@ public class ProfissionalResource {
 			@Valid @RequestBody Profissional profissional, BindingResult result) {
 
 		if (result.hasErrors()) {
+			
 			List<String> erros = new ArrayList<String>();
+			
 			result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
+			
 			return ResponseEntity.badRequest().body(new ResponseApi<Profissional>(erros));
+			
 		}
 
 		profissional.setId(id);
@@ -89,5 +97,14 @@ public class ProfissionalResource {
 		return ResponseEntity.ok(new ResponseApi<Boolean>(true));
 
 	}
+	
+	@GetMapping(value = "/disponiveisCidade/{cidade}")
+	public ResponseEntity<ResponseApi<List<Profissional>>> disponiveisCidade(@PathVariable("cidade") String cidade) {
+
+		List<Profissional> profissionais = this.profissionalService.disponiveisCidade(cidade);
+
+		return ResponseEntity.ok(new ResponseApi<List<Profissional>>(profissionais));
+
+	}	
 
 }
