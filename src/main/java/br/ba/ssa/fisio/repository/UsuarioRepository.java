@@ -15,8 +15,6 @@ public interface UsuarioRepository extends MongoRepository<Usuario, String>{
     
     Usuario findByEmail(String email);
     
-    //List<Usuario> findByLocationWithinAndPerfil(Polygon polygon, String perfil);
-    
     GeoResults<Usuario> findByLocationNear(Point point, Distance distance);
     
 }

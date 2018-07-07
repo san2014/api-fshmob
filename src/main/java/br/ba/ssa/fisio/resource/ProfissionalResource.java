@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.mongodb.BasicDBObject;
+
 import br.ba.ssa.fisio.model.Profissional;
 import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.service.ProfissionalService;
@@ -49,9 +51,13 @@ public class ProfissionalResource {
 			BindingResult result) {
 
 		if (result.hasErrors()) {
+			
 			List<String> erros = new ArrayList<String>();
+			
 			result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
+			
 			return ResponseEntity.badRequest().body(new ResponseApi<Profissional>(erros));
+			
 		}
 
 		this.profissionalService.incluir(profissional);
@@ -68,9 +74,13 @@ public class ProfissionalResource {
 			@Valid @RequestBody Profissional profissional, BindingResult result) {
 
 		if (result.hasErrors()) {
+			
 			List<String> erros = new ArrayList<String>();
+			
 			result.getAllErrors().forEach(erro -> erros.add(erro.getDefaultMessage()));
+			
 			return ResponseEntity.badRequest().body(new ResponseApi<Profissional>(erros));
+			
 		}
 
 		profissional.setId(id);
@@ -89,5 +99,25 @@ public class ProfissionalResource {
 		return ResponseEntity.ok(new ResponseApi<Boolean>(true));
 
 	}
+	
+/*	@GetMapping(value = "/disponiveisEspecialidade/{cidade}/{idEspecialidade}")
+	public ResponseEntity<ResponseApi<List<Profissional>>> disponiveisEspecialidade(
+			@PathVariable("cidade") String cidade, @PathVariable("idEspecialidade") String idEspecialidade) {
+
+		List<Profissional> profissionais = this.profissionalService.disponiveisEspecialidade(cidade, idEspecialidade);
+
+		return ResponseEntity.ok(new ResponseApi<List<Profissional>>(profissionais));
+
+	}*/
+	
+	@GetMapping(value = "/disponiveisEspecialidade/{cidade}/{idEspecialidade}")
+	public ResponseEntity<ResponseApi<List<Profissional>>> disponiveisEspecialidade(
+			@PathVariable("cidade") String cidade, @PathVariable("idEspecialidade") String idEspecialidade) {
+
+		List<Profissional> profissionais = this.profissionalService.disponiveisEspecialidade(cidade, idEspecialidade);
+
+		return ResponseEntity.ok(new ResponseApi<List<Profissional>>(profissionais));
+
+	}	
 
 }

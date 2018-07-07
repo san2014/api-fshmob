@@ -17,6 +17,7 @@ public class Profissional{
 	@Id
 	private String id; 
 	
+	@DBRef
 	@NotNull(message = "Um usuário existente deve ser informado")
 	private Usuario usuario;
 
@@ -39,7 +40,7 @@ public class Profissional{
     private Date dataEspera;
     
     @DBRef
-    private List<EspecialidadeAtendimento> especialidades;
+    private List<TipoAtendimento> especialidades;
 
     private Boolean disponivel;
     
@@ -99,11 +100,11 @@ public class Profissional{
 		this.usuario = usuario;
 	}
 	
-	public List<EspecialidadeAtendimento> getEspecialidades() {
+	public List<TipoAtendimento> getEspecialidades() {
 		return especialidades;
 	}
 
-	public void setEspecialidades(List<EspecialidadeAtendimento> especialidades) {
+	public void setEspecialidades(List<TipoAtendimento> especialidades) {
 		this.especialidades = especialidades;
 	}
 

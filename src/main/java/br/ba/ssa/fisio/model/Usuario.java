@@ -13,6 +13,8 @@ import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Document
 public class Usuario implements Serializable{
@@ -22,18 +24,23 @@ public class Usuario implements Serializable{
 	@Id
 	private String id;
     
+	@JsonInclude(Include.NON_NULL)
 	@NotNull(message = "Campo APELIDO é de preechimento obrigatório.")
 	private String apelido;
 
+	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo SENHA é de preechimento obrigatório.")
 	private String senha;
 
+	@JsonInclude(Include.NON_NULL)
 	@NotNull(message = "Campo CPF é de preechimento obrigatório.")
     private Long cpf;
 
+	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo RG é de preechimento obrigatório.")
     private String rg;
 
+	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo NOME é de preechimento obrigatório.")
     private String nome;
     
@@ -44,32 +51,44 @@ public class Usuario implements Serializable{
 	@NotNull(message = "Campo CEP é de preechimento obrigatório.")
     private Long cep;
 
+	@JsonInclude(Include.NON_NULL)
     private String logradouro;
 
+	@JsonInclude(Include.NON_NULL)
     private String bairro;
 
+	@JsonInclude(Include.NON_NULL)
     private String cidade;
     
     @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
+    @JsonInclude(Include.NON_NULL)
     private Point location;
     
+    @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo PORTA é de preechimento obrigatório.")
     private String porta;
 
+    @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo EMAIL é de preechimento obrigatório.")
     private String email;
 
+    @JsonInclude(Include.NON_NULL)
     private String imgperfil;
 
+    @JsonInclude(Include.NON_NULL)
     private PerfilEnum perfil;
 
+    @JsonInclude(Include.NON_NULL)
     @NotNull(message = "Campo SEXO é de preechimento obrigatório.")
     private Byte sexo;
 
+    @JsonInclude(Include.NON_NULL)
     private Long facebookId;
 
+    @JsonInclude(Include.NON_NULL)
     private Long googleId;
 
+    @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
     private String onesignalId;
 
@@ -81,7 +100,7 @@ public class Usuario implements Serializable{
 		super();
 		this.id = id;
 	}    
-
+	
     public Usuario(Usuario usuario) {
         this.nome = usuario.getNome();
         this.email = usuario.getEmail();

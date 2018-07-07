@@ -24,7 +24,7 @@ import br.ba.ssa.fisio.model.TipoAtendimento;
 import br.ba.ssa.fisio.service.TipoAtendimentoService;
 
 @RestController
-@RequestMapping(value = "tipoAtendimento")
+@RequestMapping(value = "/tipoAtendimento")
 public class TipoAtendimentoResource {
 
 	@Autowired
