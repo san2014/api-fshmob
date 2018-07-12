@@ -1,10 +1,10 @@
 package br.ba.ssa.fisio.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.ba.ssa.fisio.model.Perfil;
 
-public interface PerfilRepository extends MongoRepository<Perfil, String> {
+public interface PerfilRepository extends JpaRepository<Perfil, Long> {
 
 	Perfil findByNome(String nome);
 

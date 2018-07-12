@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import br.ba.ssa.fisio.model.PerfilEnum;
 import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.model.Usuario;
 import br.ba.ssa.fisio.repository.UsuarioRepository;
@@ -43,7 +42,7 @@ public class UsuarioResource {
 	}
 	
 	@GetMapping(value="/{id}")
-	public ResponseEntity<ResponseApi<Usuario>> obter(@PathVariable("id") String id){
+	public ResponseEntity<ResponseApi<Usuario>> obter(@PathVariable("id") Long id){
 		
 		Usuario usuario = this.usuarioService.obter(id);
 		
@@ -70,7 +69,7 @@ public class UsuarioResource {
 	}
 	
 	@PutMapping(value="/{id}")
-	public ResponseEntity<ResponseApi<Usuario>> atualizar(@PathVariable("id") String id, @Valid @RequestBody Usuario usuario, BindingResult result){
+	public ResponseEntity<ResponseApi<Usuario>> atualizar(@PathVariable("id") Long id, @Valid @RequestBody Usuario usuario, BindingResult result){
 		
 		if(result.hasErrors()) {
 			List<String> erros = new ArrayList<String>();
@@ -87,7 +86,7 @@ public class UsuarioResource {
 	}
 	
 	@DeleteMapping(value="/{id}")
-	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") String id) {
+	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") Long id) {
 		
 		this.usuarioService.excluir(id);
 		
@@ -104,11 +103,11 @@ public class UsuarioResource {
     }	
     
     @GetMapping(value="/filtrarProfissionais/{idCliente}")
-	public ResponseEntity<ResponseApi<List<Usuario>>> getProximoCliente(@PathVariable("idCliente") String idCliente){
+	public ResponseEntity<ResponseApi<List<Usuario>>> getProximoCliente(@PathVariable("idCliente") Long idCliente){
 		
 		Usuario cliente = this.usuarioService.obter(idCliente);
 		
-		List<Usuario> usuarios = this.usuarioService.getByCoordenadas(cliente.getLocation(), PerfilEnum.ROLE_PROFISSIONAL.toString());
+		List<Usuario> usuarios = new ArrayList<Usuario>();
 		
 		return ResponseEntity.ok(new ResponseApi<List<Usuario>>(usuarios));
 	}    

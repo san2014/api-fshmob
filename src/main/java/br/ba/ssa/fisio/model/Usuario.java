@@ -3,26 +3,29 @@ package br.ba.ssa.fisio.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
-import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Document
+@Entity
 public class Usuario implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6349076669705013757L;
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
     
 	@JsonInclude(Include.NON_NULL)
 	@NotNull(message = "Campo APELIDO é de preechimento obrigatório.")
@@ -60,10 +63,6 @@ public class Usuario implements Serializable{
 	@JsonInclude(Include.NON_NULL)
     private String cidade;
     
-    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2DSPHERE)
-    @JsonInclude(Include.NON_NULL)
-    private Point location;
-    
     @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo PORTA é de preechimento obrigatório.")
     private String porta;
@@ -96,7 +95,7 @@ public class Usuario implements Serializable{
     
     public Usuario() {}
     
-	public Usuario(String id) {
+	public Usuario(Long id) {
 		super();
 		this.id = id;
 	}    
@@ -115,11 +114,11 @@ public class Usuario implements Serializable{
     }
 	
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -205,15 +204,6 @@ public class Usuario implements Serializable{
 
 	public String getPorta() {
 		return porta;
-	}
-	
-
-	public Point getLocation() {
-		return location;
-	}
-
-	public void setLocation(Point location) {
-		this.location = location;
 	}
 
 	public void setPorta(String porta) {

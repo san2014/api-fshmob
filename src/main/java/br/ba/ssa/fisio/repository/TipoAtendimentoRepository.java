@@ -1,9 +1,9 @@
 package br.ba.ssa.fisio.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.ba.ssa.fisio.model.TipoAtendimento;
 
-public interface TipoAtendimentoRepository extends MongoRepository<TipoAtendimento, String>{
+public interface TipoAtendimentoRepository extends JpaRepository<TipoAtendimento, Long>{
 	
 }

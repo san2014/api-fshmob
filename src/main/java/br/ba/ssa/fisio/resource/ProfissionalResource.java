@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.mongodb.BasicDBObject;
-
 import br.ba.ssa.fisio.model.Profissional;
 import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.service.ProfissionalService;
@@ -38,7 +36,7 @@ public class ProfissionalResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ResponseApi<Profissional>> obter(@PathVariable("id") String id) {
+	public ResponseEntity<ResponseApi<Profissional>> obter(@PathVariable("id") Long id) {
 
 		Profissional profissional = this.profissionalService.obter(id);
 
@@ -70,7 +68,7 @@ public class ProfissionalResource {
 	}
 
 	@PutMapping(value = "{id}")
-	public ResponseEntity<ResponseApi<Profissional>> atualizar(@PathVariable("id") String id,
+	public ResponseEntity<ResponseApi<Profissional>> atualizar(@PathVariable("id") Long id,
 			@Valid @RequestBody Profissional profissional, BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -92,7 +90,7 @@ public class ProfissionalResource {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") String id) {
+	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") Long id) {
 
 		this.profissionalService.excluir(id);
 

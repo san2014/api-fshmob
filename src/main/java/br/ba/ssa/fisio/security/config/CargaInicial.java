@@ -1,9 +1,7 @@
 package br.ba.ssa.fisio.security.config;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import br.ba.ssa.fisio.model.Perfil;
 import br.ba.ssa.fisio.model.PerfilEnum;
 import br.ba.ssa.fisio.model.Usuario;
-import br.ba.ssa.fisio.repository.PerfilRepository;
 import br.ba.ssa.fisio.repository.UsuarioRepository;
 import br.ba.ssa.fisio.security.SenhaUtils;
 

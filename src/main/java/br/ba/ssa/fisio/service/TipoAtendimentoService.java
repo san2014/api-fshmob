@@ -20,7 +20,7 @@ public class TipoAtendimentoService {
 		return this.tipoAtendimentoRepository.findAll();
 	}
 	
-	public TipoAtendimento obter(String id) {
+	public TipoAtendimento obter(Long id) {
 		
 		try {
 			return this.tipoAtendimentoRepository.findOne(id);
@@ -39,12 +39,12 @@ public class TipoAtendimentoService {
 		this.tipoAtendimentoRepository.save(tipoAtendimento);
 	}
 	
-	public void excluir(String id) {
+	public void excluir(Long id) {
 		this.verificarExistencia(id);
 		this.tipoAtendimentoRepository.delete(id);
 	}
 	
-	private void verificarExistencia(String id) {
+	private void verificarExistencia(Long id) {
 		if (!this.tipoAtendimentoRepository.exists(id)) {
 			throw new GenericException("Tipo Atendimento inexistente!");
 		}

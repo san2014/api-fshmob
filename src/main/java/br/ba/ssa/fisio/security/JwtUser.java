@@ -9,12 +9,12 @@ public class JwtUser implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
+	private Long id;
 	private String username;
 	private String password​;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public JwtUser(String id, String username, String password, 
+	public JwtUser(Long id, String username, String password, 
 			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
@@ -22,11 +22,11 @@ public class JwtUser implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

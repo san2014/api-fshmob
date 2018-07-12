@@ -1,16 +1,17 @@
 package br.ba.ssa.fisio.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import org.springframework.security.core.GrantedAuthority;
 
-@Document
+@Entity
 public class Perfil implements GrantedAuthority {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1081065664774834904L;
 
 	@Id
 	private String id;

@@ -1,18 +1,10 @@
 package br.ba.ssa.fisio.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.geo.Distance;
-import org.springframework.data.geo.GeoResult;
-import org.springframework.data.geo.GeoResults;
-import org.springframework.data.geo.Metrics;
-import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.NearQuery;
 import org.springframework.stereotype.Service;
 
 import br.ba.ssa.fisio.model.Usuario;
@@ -25,14 +17,11 @@ public class UsuarioService {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-    MongoTemplate mongoTemplate;
-	
 	public List<Usuario> listar(){
 		return this.usuarioRepository.findAll();
 	}
 	
-	public Usuario obter(String id) {
+	public Usuario obter(Long id) {
 		try {
 			return this.usuarioRepository.findOne(id);
 		} catch (NoSuchElementException e) {
@@ -49,7 +38,7 @@ public class UsuarioService {
 		this.usuarioRepository.save(usuario);
 	}
 	
-	public void excluir(String id) {
+	public void excluir(Long id) {
 		this.verificarExistencia(id);
 		this.usuarioRepository.delete(id);
 	}
@@ -58,27 +47,7 @@ public class UsuarioService {
 		return Optional.ofNullable(this.usuarioRepository.findByEmail(email));
 	}
 
-	public List<Usuario> getByCoordenadas(Point coordenadas, String perfil) {
-		
-		NearQuery nearQuery = NearQuery.near(new Point(coordenadas))
-				.minDistance(0.00)
-				.maxDistance(new Distance(200, Metrics.KILOMETERS))
-				.skip(1);
-		
-		GeoResults<Usuario> data = this.mongoTemplate.geoNear(nearQuery, Usuario.class);
-		
-		List<Usuario> usuarios = new ArrayList<Usuario>();
-		
-		for (GeoResult<?> geoResult : data.getContent()) {
-			Usuario usuario  = (Usuario) geoResult.getContent();
-			usuarios.add(usuario);
-		}
-		
-		return usuarios;
-
-	}	
-	
-	private void verificarExistencia(String id) {
+	private void verificarExistencia(Long id) {
 		if (!this.usuarioRepository.exists(id)) {
 			throw new GenericException("Usuário inexistente!");
 		}

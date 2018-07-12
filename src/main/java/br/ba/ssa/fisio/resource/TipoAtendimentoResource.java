@@ -40,7 +40,7 @@ public class TipoAtendimentoResource {
 	}
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<ResponseApi<TipoAtendimento>> obter(@PathVariable("id") String id) {
+	public ResponseEntity<ResponseApi<TipoAtendimento>> obter(@PathVariable("id") Long id) {
 
 		TipoAtendimento tipoAtendimento = this.tipoAtendimentoService.obter(id);
 
@@ -68,7 +68,7 @@ public class TipoAtendimentoResource {
 	}
 
 	@PutMapping(value = "{id}")
-	public ResponseEntity<ResponseApi<TipoAtendimento>> atualizar(@PathVariable("id") String id,
+	public ResponseEntity<ResponseApi<TipoAtendimento>> atualizar(@PathVariable("id") Long id,
 			@Valid @RequestBody TipoAtendimento tipoAtendimento, BindingResult result) {
 
 		if (result.hasErrors()) {
@@ -86,7 +86,7 @@ public class TipoAtendimentoResource {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") String id) {
+	public ResponseEntity<ResponseApi<Boolean>> deletar(@PathVariable("id") Long id) {
 
 		this.tipoAtendimentoService.excluir(id);
 
