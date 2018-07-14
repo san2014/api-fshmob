@@ -3,95 +3,121 @@ package br.ba.ssa.fisio.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
+@Table(name="ap_usuario")
 public class Usuario implements Serializable{
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6349076669705013757L;
+	private static final long serialVersionUID = -4269693776050453451L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="usua_id")
 	private Long id;
     
+	@Column(name="usua_apelido")
 	@JsonInclude(Include.NON_NULL)
 	@NotNull(message = "Campo APELIDO é de preechimento obrigatório.")
 	private String apelido;
 
+	@Column(name="usua_senha")
 	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo SENHA é de preechimento obrigatório.")
 	private String senha;
 
+	@Column(name="usua_cpf")
 	@JsonInclude(Include.NON_NULL)
 	@NotNull(message = "Campo CPF é de preechimento obrigatório.")
-    private Long cpf;
+    private String cpf;
 
+	@Column(name="usua_rg")
 	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo RG é de preechimento obrigatório.")
     private String rg;
 
+	@Column(name="usua_nome")
 	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo NOME é de preechimento obrigatório.")
     private String nome;
     
+	@Column(name="usua_dt_nasc")
 	@NotNull(message = "Campo NASCIMENTO é de preechimento obrigatório.")
 	@JsonFormat(pattern = "dd/MM/yyyy")
     private Date nascimento;
 
+	@Column(name="usua_cep")
 	@NotNull(message = "Campo CEP é de preechimento obrigatório.")
     private Long cep;
 
+	@Column(name="usua_logradouro")
 	@JsonInclude(Include.NON_NULL)
     private String logradouro;
 
+	@Column(name="usua_bairro")
 	@JsonInclude(Include.NON_NULL)
     private String bairro;
 
+	@Column(name="usua_cidade")
 	@JsonInclude(Include.NON_NULL)
     private String cidade;
     
+	@Column(name="usua_porta")
     @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo PORTA é de preechimento obrigatório.")
     private String porta;
 
+	@Column(name="usua_email")
     @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo EMAIL é de preechimento obrigatório.")
     private String email;
 
+	@Column(name="usua_imgurl")
     @JsonInclude(Include.NON_NULL)
     private String imgperfil;
 
+	@ManyToOne()
+	@JoinColumn(name="usua_perf_id")
     @JsonInclude(Include.NON_NULL)
-    private PerfilEnum perfil;
+    private Perfil perfil;
 
+	@Column(name="usua_sexo")
     @JsonInclude(Include.NON_NULL)
     @NotNull(message = "Campo SEXO é de preechimento obrigatório.")
     private Byte sexo;
 
+	@Column(name="usua_facebook_id")
     @JsonInclude(Include.NON_NULL)
     private Long facebookId;
 
+	@Column(name="usua_google_id")
     @JsonInclude(Include.NON_NULL)
     private Long googleId;
 
+	@Column(name="usua_onesignal_id")
     @JsonInclude(Include.NON_NULL)
     @NotEmpty(message = "Campo ONESIGNALID é de preechimento obrigatório.")
     private String onesignalId;
 
-    private Boolean ativo;
+	@Column(name="usua_ativo")
+	private Boolean ativo;
     
     public Usuario() {}
     
@@ -106,13 +132,12 @@ public class Usuario implements Serializable{
         this.senha = usuario.getSenha();
     }
 
-    public Usuario(String nome, String email, String senha, PerfilEnum perfil) {
+    public Usuario(String nome, String email, String senha, Perfil perfil) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
         this.perfil = perfil;
     }
-	
 	
 	public Long getId() {
 		return id;
@@ -138,11 +163,11 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 
-	public Long getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
 
-	public void setCpf(Long cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 
@@ -226,11 +251,11 @@ public class Usuario implements Serializable{
 		this.imgperfil = imgperfil;
 	}
 
-	public PerfilEnum getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(PerfilEnum perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
 

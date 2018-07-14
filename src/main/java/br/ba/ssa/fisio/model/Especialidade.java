@@ -23,6 +23,20 @@ public class Especialidade {
 	
 	@Column(name="espc_ativo")
 	private Boolean ativo;
+	
+	public Especialidade() {}
+
+	public Especialidade(Long id) {
+		super();
+		this.id = id;
+	}
+	
+	public Especialidade(Long id, String descricao, Boolean ativo) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+		this.ativo = ativo;
+	}
 
 	public Long getId() {
 		return id;

@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import br.ba.ssa.fisio.model.PerfilEnum;
+import br.ba.ssa.fisio.model.Perfil;
 import br.ba.ssa.fisio.model.Usuario;
 
 public class JwtUserFactory {
@@ -18,9 +18,9 @@ public class JwtUserFactory {
 				mapToGrantedAuthorities(usuario.getPerfil()));
 	}
 	
-	private static List<GrantedAuthority> mapToGrantedAuthorities(PerfilEnum perfilEnum){
+	private static List<GrantedAuthority> mapToGrantedAuthorities(Perfil perfil){
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		authorities.add(new SimpleGrantedAuthority(perfilEnum.toString()));
+		authorities.add(new SimpleGrantedAuthority(perfil.toString()));
 		return authorities;
 	}
 	

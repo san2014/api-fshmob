@@ -6,6 +6,6 @@ import br.ba.ssa.fisio.model.Perfil;
 
 public interface PerfilRepository extends JpaRepository<Perfil, Long> {
 
-	Perfil findByNome(String nome);
+	Perfil findByDescricao(String descricao);
 
 }

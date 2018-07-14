@@ -6,31 +6,43 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
-@Table(name="AT_TIPO_ATENDIMENTO")
+@Table(name="at_tipo_atendimento")
 public class TipoAtendimento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="espc_id")
+	@Column(name="tpat_id")
 	private Long id;
 	
 	@ManyToOne
+	@JoinColumn(name="tpat_espc_id")
 	private Especialidade especialidade;
 	
-	@Column(name="espc_valor")
+	@Column(name="tpat_valor")
 	private BigDecimal valor;
 	
-	@Column(name="espc_imgurl")
+	@Column(name="tpat_imgurl")
 	private String imgUrl;
 	
-	@Column(name="espc_ativo")
+	@Column(name="tpat_ativo")
 	private Boolean ativo = true;
+	
+	public TipoAtendimento() {
+	}
+	
+	public TipoAtendimento(Long id) {
+		super();
+		this.id = id;
+	}
 
 	public Long getId() {
 		return id;
