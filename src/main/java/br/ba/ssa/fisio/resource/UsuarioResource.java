@@ -46,6 +46,8 @@ public class UsuarioResource {
 		
 		Usuario usuario = this.usuarioService.obter(id);
 		
+		usuario.setSenha(null);
+		
 		return ResponseEntity.ok(new ResponseApi<Usuario>(usuario));
 		
 	}

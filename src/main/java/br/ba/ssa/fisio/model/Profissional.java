@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,6 +29,7 @@ public class Profissional{
 	private Long id; 
 	
 	@ManyToOne
+	@JoinColumn(name="prof_usua_id")
 	@NotNull(message = "Um usuário existente deve ser informado")
 	private Usuario usuario;
 
@@ -45,10 +49,14 @@ public class Profissional{
 	@NotNull(message = "Um banco deve ser informado")
     private String banco;
     
+	@Column(name="prof_dataespera")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataEspera;
     
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name="pf_profissional_especilidade",
+    joinColumns={@JoinColumn(name="pfes_prof_id", referencedColumnName="prof_id")},
+    inverseJoinColumns={@JoinColumn(name="pfes_espc_id", referencedColumnName="espc_id")})    
     private List<Especialidade> especialidades;
 
     @Column(name="prof_disponivel")
@@ -57,7 +65,7 @@ public class Profissional{
     
     @Column(name="prof_ativo")
     @NotNull
-    private Boolean ativo;    
+    private Boolean ativo = true;    
     
 	public Long getId() {
 		return id;

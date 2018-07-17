@@ -39,7 +39,6 @@ public class Usuario implements Serializable{
 	private String apelido;
 
 	@Column(name="usua_senha")
-	@JsonInclude(Include.NON_NULL)
 	@NotEmpty(message = "Campo SENHA é de preechimento obrigatório.")
 	private String senha;
 
@@ -117,7 +116,7 @@ public class Usuario implements Serializable{
     private String onesignalId;
 
 	@Column(name="usua_ativo")
-	private Boolean ativo;
+	private Boolean ativo = true;
     
     public Usuario() {}
     
@@ -156,7 +155,7 @@ public class Usuario implements Serializable{
 	}
 
 	public String getSenha() {
-		return senha;
+		return this.senha;
 	}
 
 	public void setSenha(String senha) {

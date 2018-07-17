@@ -18,7 +18,15 @@ public class UsuarioService {
 	private UsuarioRepository usuarioRepository;
 	
 	public List<Usuario> listar(){
-		return this.usuarioRepository.findAll();
+		
+		List<Usuario> usuarios = this.usuarioRepository.findAll();
+		
+		for (Usuario usuario : usuarios) {
+			usuario.setSenha(null);
+		}
+		
+		return usuarios;
+		
 	}
 	
 	public Usuario obter(Long id) {
