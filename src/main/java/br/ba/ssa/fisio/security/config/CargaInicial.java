@@ -10,10 +10,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import br.ba.ssa.fisio.model.Cliente;
 import br.ba.ssa.fisio.model.Especialidade;
 import br.ba.ssa.fisio.model.Perfil;
 import br.ba.ssa.fisio.model.TipoAtendimento;
 import br.ba.ssa.fisio.model.Usuario;
+import br.ba.ssa.fisio.repository.ClienteRepository;
 import br.ba.ssa.fisio.repository.EspecialidadeRepository;
 import br.ba.ssa.fisio.repository.PerfilRepository;
 import br.ba.ssa.fisio.repository.TipoAtendimentoRepository;
@@ -35,6 +37,9 @@ public class CargaInicial implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     UsuarioRepository usuarioRepository;
     
+    @Autowired
+    ClienteRepository clienteRepository;
+    
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent e) {
@@ -46,6 +51,8 @@ public class CargaInicial implements ApplicationListener<ContextRefreshedEvent> 
     	this.cargaPerfis();
 
     	this.cargaUsuario();
+    	
+    	this.cargaCliente();
 
     }
     
@@ -140,7 +147,7 @@ public class CargaInicial implements ApplicationListener<ContextRefreshedEvent> 
 			usuario.setEmail("carvalho.alesandro@gmail.com");
 			usuario.setCpf("01692866575");
 			usuario.setRg("1118627873");
-			usuario.setImgperfil("");
+			usuario.setImgPerfil("");
 			usuario.setApelido("San");
 			usuario.setSenha(SenhaUtils.gerarBCrypt("123456"));
 
@@ -164,6 +171,19 @@ public class CargaInicial implements ApplicationListener<ContextRefreshedEvent> 
 
 		}
 
+	}
+	
+	private void cargaCliente() {
+		
+		List<Cliente> clientes = this.clienteRepository.findAll();
+		
+		if(clientes.isEmpty()) {
+			
+			Cliente cliente = new Cliente(null, new Usuario(2L), true);
+			
+			this.clienteRepository.save(cliente);
+			
+		}
 	}
 	
 

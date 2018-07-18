@@ -23,18 +23,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.ba.ssa.fisio.model.ResponseApi;
 import br.ba.ssa.fisio.model.Usuario;
-import br.ba.ssa.fisio.repository.UsuarioRepository;
 import br.ba.ssa.fisio.service.UsuarioService;
 
 @RestController
-@RequestMapping(value="usuario")
+@RequestMapping(value="/usuario")
 public class UsuarioResource {
 	
 	@Autowired
 	private UsuarioService usuarioService;
-	
-	@Autowired
-	private UsuarioRepository repository;
 	
 	@GetMapping
 	public ResponseEntity<ResponseApi<List<Usuario>>> listar(){
@@ -52,6 +48,18 @@ public class UsuarioResource {
 		
 	}
 	
+    @GetMapping(value = "/obterPorEmail/{email}")
+    @ResponseBody
+    public ResponseEntity<ResponseApi<Usuario>>  obterPorEmail(@PathVariable("email") String email) {
+        
+    	Usuario usuario = this.usuarioService.buscaPorEmail(email).get();
+        
+    	usuario.setSenha("");
+        
+        return ResponseEntity.ok(new ResponseApi<Usuario>(usuario));
+        
+    }	
+	
 	@PostMapping
 	public ResponseEntity<ResponseApi<Usuario>> incluir(@Valid @RequestBody Usuario usuario, BindingResult result){
 		
@@ -61,7 +69,7 @@ public class UsuarioResource {
 			return ResponseEntity.badRequest().body(new ResponseApi<Usuario>(erros));
 		}
 		
-		this.usuarioService.incluir(usuario);
+		usuario = this.usuarioService.incluir(usuario);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().
 				path("/{id}").buildAndExpand(usuario.getId()).toUri();
@@ -98,20 +106,15 @@ public class UsuarioResource {
 	
     @GetMapping(value = "/logado")
     @ResponseBody
-    public Usuario currentUserName(Principal principal) {
-        Usuario usuario = this.repository.findByEmail(principal.getName());
-        usuario.setSenha("");
-        return usuario;
-    }	
+    public ResponseEntity<ResponseApi<Usuario>> currentUserName(Principal principal) {
+        
+    	Usuario usuario = this.usuarioService.buscaPorEmail(principal.getName()).get();
+        
+    	usuario.setSenha("");
+        
+    	return ResponseEntity.ok(new ResponseApi<Usuario>(usuario));
+    }
     
-    @GetMapping(value="/filtrarProfissionais/{idCliente}")
-	public ResponseEntity<ResponseApi<List<Usuario>>> getProximoCliente(@PathVariable("idCliente") Long idCliente){
-		
-		Usuario cliente = this.usuarioService.obter(idCliente);
-		
-		List<Usuario> usuarios = new ArrayList<Usuario>();
-		
-		return ResponseEntity.ok(new ResponseApi<List<Usuario>>(usuarios));
-	}    
-
+    
+    
 }

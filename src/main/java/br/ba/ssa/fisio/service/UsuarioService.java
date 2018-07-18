@@ -30,35 +30,53 @@ public class UsuarioService {
 	}
 	
 	public Usuario obter(Long id) {
+		
 		try {
+			
 			return this.usuarioRepository.findOne(id);
+			
 		} catch (NoSuchElementException e) {
+			
 			throw new GenericException("Usuário Inexisente");
+			
 		}
+		
 	}
 	
 	public Usuario incluir(Usuario usuario) {
+		
 		return this.usuarioRepository.save(usuario);
+		
 	}
 	
 	public void atualizar(Usuario usuario) {
+		
 		this.verificarExistencia(usuario.getId());
+		
 		this.usuarioRepository.save(usuario);
+		
 	}
 	
 	public void excluir(Long id) {
+		
 		this.verificarExistencia(id);
+		
 		this.usuarioRepository.delete(id);
+		
 	}
 	
 	public Optional<Usuario> buscaPorEmail(String email){
+		
 		return Optional.ofNullable(this.usuarioRepository.findByEmail(email));
+		
 	}
 
 	private void verificarExistencia(Long id) {
+		
 		if (!this.usuarioRepository.exists(id)) {
 			throw new GenericException("Usuário inexistente!");
 		}
+		
 	}
 	
 }

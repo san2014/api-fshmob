@@ -90,7 +90,7 @@ public class Usuario implements Serializable{
 
 	@Column(name="usua_imgurl")
     @JsonInclude(Include.NON_NULL)
-    private String imgperfil;
+    private String imgPerfil;
 
 	@ManyToOne()
 	@JoinColumn(name="usua_perf_id")
@@ -242,12 +242,12 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public String getImgperfil() {
-		return imgperfil;
+	public String getImgPerfil() {
+		return imgPerfil;
 	}
 
-	public void setImgperfil(String imgperfil) {
-		this.imgperfil = imgperfil;
+	public void setImgPerfil(String imgPerfil) {
+		this.imgPerfil = imgPerfil;
 	}
 
 	public Perfil getPerfil() {
