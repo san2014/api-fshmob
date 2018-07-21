@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>br.ba.ssa.fisio</groupId>
-	<artifactId>api-fisio-mongodb</artifactId>
+	<artifactId>api-fsh</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>api-fisio-mongodb</name>
+	<name>api-fsh</name>
 	<description>API Rest FisioHome</description>
 
 	<parent>

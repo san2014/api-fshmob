@@ -8,10 +8,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 @SpringBootApplication
-public class ApiFisioMongodbApplication {
+public class ApiFshApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ApiFisioMongodbApplication.class, args);
+		SpringApplication.run(ApiFshApplication.class, args);
 	}
 
 	@Bean
