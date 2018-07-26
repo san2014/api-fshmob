@@ -33,7 +33,7 @@ public class UsuarioService {
 		
 		try {
 			
-			return this.usuarioRepository.findOne(id);
+			return this.usuarioRepository.findById(id).get();
 			
 		} catch (NoSuchElementException e) {
 			
@@ -61,7 +61,7 @@ public class UsuarioService {
 		
 		this.verificarExistencia(id);
 		
-		this.usuarioRepository.delete(id);
+		this.usuarioRepository.deleteById(id);
 		
 	}
 	
@@ -73,7 +73,7 @@ public class UsuarioService {
 
 	private void verificarExistencia(Long id) {
 		
-		if (!this.usuarioRepository.exists(id)) {
+		if (!this.usuarioRepository.existsById(id)) {
 			throw new GenericException("Usuário inexistente!");
 		}
 		

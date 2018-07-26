@@ -23,7 +23,7 @@ public class ClienteService {
 		
 		this.verificarExistencia(id);
 		
-		return this.clienteRepository.findOne(id);
+		return this.clienteRepository.findById(id).get();
 		
 	}
 	
@@ -45,13 +45,13 @@ public class ClienteService {
 		
 		this.verificarExistencia(id);
 		
-		this.clienteRepository.delete(id);
+		this.clienteRepository.deleteById(id);
 		
 	}	
 	
 	private void verificarExistencia(Long id) {
 		
-		if (!clienteRepository.exists(id)) {
+		if (!clienteRepository.existsById(id)) {
 			throw new ClienteInexistenteException("Cliente: Id inexistente");
 		}
 		

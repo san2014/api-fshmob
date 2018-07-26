@@ -1,6 +1,6 @@
 package br.ba.ssa.fisio.security.dto;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 public class JwtAuthenticationDto {
 
@@ -11,7 +11,7 @@ public class JwtAuthenticationDto {
 	public JwtAuthenticationDto() {
 	}
 
-	@NotEmpty(message = "E-mail não pode ser vazio")
+	@NotBlank(message = "E-mail não pode ser vazio")
 	public String getEmail() {
 		return email;
 	}
@@ -20,7 +20,7 @@ public class JwtAuthenticationDto {
 		this.email = email;
 	}
 
-	@NotEmpty(message = "Senha não pode ser vazia")
+	@NotBlank(message = "Senha não pode ser vazia")
 	public String getSenha() {
 		return senha;
 	}

@@ -23,7 +23,7 @@ public class TipoAtendimentoService {
 	public TipoAtendimento obter(Long id) {
 		
 		try {
-			return this.tipoAtendimentoRepository.findOne(id);
+			return this.tipoAtendimentoRepository.findById(id).get();
 		} catch (NoSuchElementException e) {
 			throw new GenericException("Profissional Inexisente");
 		}
@@ -41,11 +41,11 @@ public class TipoAtendimentoService {
 	
 	public void excluir(Long id) {
 		this.verificarExistencia(id);
-		this.tipoAtendimentoRepository.delete(id);
+		this.tipoAtendimentoRepository.deleteById(id);
 	}
 	
 	private void verificarExistencia(Long id) {
-		if (!this.tipoAtendimentoRepository.exists(id)) {
+		if (!this.tipoAtendimentoRepository.existsById(id)) {
 			throw new GenericException("Tipo Atendimento inexistente!");
 		}
 	}	

@@ -23,7 +23,7 @@ public class ProfissionalService {
 	public Profissional obter(Long id) {
 		
 		try {
-			return this.profissionalRepository.findOne(id);
+			return this.profissionalRepository.findById(id).get();
 		} catch (NoSuchElementException e) {
 			throw new GenericException("Profissional Inexisente");
 		}
@@ -41,7 +41,7 @@ public class ProfissionalService {
 	
 	public void excluir(Long id) {
 		this.verificarExistencia(id);
-		this.profissionalRepository.delete(id);
+		this.profissionalRepository.deleteById(id);
 	}
 	
 	public List<Profissional> disponiveisEspecialidade(String cidade, String idEspecialidade) {
@@ -51,7 +51,7 @@ public class ProfissionalService {
 	}
 
 	private void verificarExistencia(Long id) {
-		if (!this.profissionalRepository.exists(id)) {
+		if (!this.profissionalRepository.existsById(id)) {
 			throw new GenericException("Profissional inexistente!");
 		}
 	}
