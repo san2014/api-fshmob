@@ -44,9 +44,10 @@ public class ProfissionalService {
 		this.profissionalRepository.deleteById(id);
 	}
 	
-	public List<Profissional> disponiveisEspecialidade(String cidade, String idEspecialidade) {
-
-		return null;
+	public List<Profissional> disponiveisEspecialidade(Long idEspecialidade, String cidade) {
+		
+		return this.profissionalRepository.disponiveisAtendimento(idEspecialidade, cidade);
+		//return this.profissionalRepository.findAllByEspecialidadesIdAndUsuarioCidade(idEspecialidade, cidade);
 
 	}
 

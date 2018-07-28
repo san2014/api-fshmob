@@ -98,21 +98,11 @@ public class ProfissionalResource {
 
 	}
 	
-/*	@GetMapping(value = "/disponiveisEspecialidade/{cidade}/{idEspecialidade}")
+	@GetMapping(value = "/disponiveisEspecialidade/{idEspecialidade}/{cidade}")
 	public ResponseEntity<ResponseApi<List<Profissional>>> disponiveisEspecialidade(
-			@PathVariable("cidade") String cidade, @PathVariable("idEspecialidade") String idEspecialidade) {
+			@PathVariable("idEspecialidade") Long idEspecialidade, @PathVariable("cidade") String cidade) {
 
-		List<Profissional> profissionais = this.profissionalService.disponiveisEspecialidade(cidade, idEspecialidade);
-
-		return ResponseEntity.ok(new ResponseApi<List<Profissional>>(profissionais));
-
-	}*/
-	
-	@GetMapping(value = "/disponiveisEspecialidade/{cidade}/{idEspecialidade}")
-	public ResponseEntity<ResponseApi<List<Profissional>>> disponiveisEspecialidade(
-			@PathVariable("cidade") String cidade, @PathVariable("idEspecialidade") String idEspecialidade) {
-
-		List<Profissional> profissionais = this.profissionalService.disponiveisEspecialidade(cidade, idEspecialidade);
+		List<Profissional> profissionais = this.profissionalService.disponiveisEspecialidade(idEspecialidade, cidade);
 
 		return ResponseEntity.ok(new ResponseApi<List<Profissional>>(profissionais));
 
